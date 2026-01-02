@@ -53,27 +53,14 @@
   <!-- MACRO DEFINITION-->
   <xacro:macro name="tiago_dual_ros2_control">
 
-    <!-- Init the ROS 2 control gazebo interface -->
-    <xacro:if value="${use_sim_time}">
-      <gazebo>
-        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-          <parameters>$(find tiago_description)/ros2_control/gazebo_controller_manager_cfg.yaml</parameters>
-        </plugin>
-      </gazebo>
-    </xacro:if>
-
     <!-- ROS 2 control config-->
     <ros2_control name="ros2_control_tiago_dual_system" type="system">
 
       <!-- Execution env config -->
       <hardware>
-        <xacro:if value="${use_sim_time}">
-          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-        
-        </xacro:if>
-        <xacro:unless value="${use_sim_time}">
-          <plugin>robot_control/RobotControl</plugin>
-        </xacro:unless>
+        <plugin>tiago_isaac_ros2_control/IsaacJointStateSystem</plugin>
+        <param name="joint_states_topic">/joint_states</param>
+        <param name="joint_command_topic">/joint_command</param>
       </hardware>
 
       <!-- Wheels -->
