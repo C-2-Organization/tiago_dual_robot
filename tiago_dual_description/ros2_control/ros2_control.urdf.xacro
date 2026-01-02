@@ -58,7 +58,7 @@
 
       <!-- Execution env config -->
       <hardware>
-        <plugin>tiago_isaac_ros2_control/IsaacJointStateSystem</plugin>
+        <plugin>tiago_isaac_ros2_control/IsaacSystem</plugin>
         <param name="joint_states_topic">/joint_states</param>
         <param name="joint_command_topic">/joint_command</param>
       </hardware>
